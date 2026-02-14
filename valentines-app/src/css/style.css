@@ -1,48 +1,139 @@
-body {
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    text-align: center;
+:root{
+  --bg1: #ffeef6;
+  --bg2: #fff7f0;
+  --card: rgba(255,255,255,0.85);
+  --accent: #ff6b9a;
+  --muted: #6b6b6b;
 }
 
-h1 {
-    color: #ff6f61;
-    margin-bottom: 20px;
+*{box-sizing:border-box}
+html,body,.page{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  -webkit-font-smoothing:antialiased;
 }
 
-button {
-    background-color: #ffcccb;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.card{
+  width: min(720px, 96%);
+  max-width:720px;
+  background: var(--card);
+  border-radius:20px;
+  padding:32px;
+  box-shadow: 0 12px 30px rgba(101,67,102,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  text-align:center;
+  transform: translateY(-6px);
+  position:relative;
 }
 
-button:hover {
-    background-color: #ffb3b3;
+h1{
+  margin:0 0 8px 0;
+  font-size: clamp(20px, 3.5vw, 36px);
+  color: #3b2a36;
 }
 
-#no-button {
-    position: relative;
-    transition: transform 0.2s;
+.sub{
+  margin:0 0 20px 0;
+  color: var(--muted);
+  opacity:0.9;
 }
 
-#no-button:hover {
-    transform: translate(calc(10px * (1 - 2 * Math.random())), calc(10px * (1 - 2 * Math.random())));
+.button-area{
+  height:120px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
 }
 
-.hidden {
-    display: none;
+/* Buttons */
+.btn{
+  appearance:none;
+  border:0;
+  padding:14px 24px;
+  border-radius:12px;
+  font-size:16px;
+  cursor:pointer;
+  transition: transform .18s ease, box-shadow .18s;
+  box-shadow: 0 6px 12px rgba(94,46,84,0.08);
 }
 
-#second-screen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
+.btn:active{ transform: scale(.98) }
+
+.btn-yes{
+  background: linear-gradient(180deg,#ff8fb4,#ff6b9a);
+  color:white;
+}
+
+.btn-no{
+  position:absolute;
+  right:calc(50% - 56px);
+  top: calc(50% - 20px);
+  background: white;
+  border: 1px solid #f0dbe0;
+  color:#7a5566;
+  min-width:84px;
+  z-index:10;
+  transition: left .22s ease, top .22s ease;
+}
+
+/* Celebrate overlay */
+.celebrate.hidden{ display:none }
+.celebrate{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter: blur(6px) saturate(120%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,245,250,0.6));
+  z-index:60;
+}
+.celebrate-card{
+  background:white;
+  padding:28px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow: 0 20px 50px rgba(84,28,56,0.12);
+  width:min(600px,94%);
+}
+.celebrate-card h2{ margin:0 0 12px; color:#4b2b3a }
+.celebrate-card .big{ font-size:18px; color:#7a5566 }
+
+/* Simple hearts animation */
+.hearts{
+  height:72px;
+  margin-bottom:12px;
+  position:relative;
+  overflow:visible;
+}
+.hearts::before, .hearts::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:42px;height:42px;
+  background: radial-gradient(circle at 30% 25%, #fff7, transparent 30%), linear-gradient(45deg,#ff8fb4,#ff6b9a);
+  clip-path: path("M12 21c-0.5 0-1-0.2-1.4-0.6C6.9 16.8 2 13.3 2 8.5 2 5.5 4.5 3 7.5 3 9.1 3 10.4 3.8 11 5.1 11.6 3.8 12.9 3 14.5 3 17.5 3 20 5.5 20 8.5 20 13.3 15.1 16.8 9.4 20.4 9 20.7 8.5 21 8 21z");
+  animation: pop 1.2s ease infinite;
+}
+.hearts::after{ transform: translateX(-10%) translateY(8px) scale(.85); animation-delay:.25s }
+
+@keyframes pop{
+  0%{ transform: translateX(-50%) scale(.8) translateY(6px); opacity:0 }
+  25%{ opacity:1; transform: translateX(-50%) scale(1.06) translateY(-6px) }
+  60%{ transform: translateX(-50%) scale(.96) translateY(-2px) }
+  100%{ transform: translateX(-50%) scale(1) translateY(0) opacity:1 }
+}
+
+/* Responsive notes */
+@media (max-width:420px){
+  .button-area{ height:160px }
+  .btn-no{ right:10px; top:10px }
 }

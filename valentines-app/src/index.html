@@ -1,21 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's App</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Valentine</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="main-screen">
-        <h1 id="message"></h1>
-        <button id="yes-button">Yes</button>
-        <button id="no-button">No</button>
+  <main class="page">
+    <div class="card" id="card">
+      <h1><span id="name">Someone</span>, will you be my Valentine?</h1>
+      <p class="sub">Choose carefully 💌</p>
+
+      <div class="button-area" id="area">
+        <button id="yes" class="btn btn-yes" aria-label="Yes">Yes</button>
+        <button id="no" class="btn btn-no" aria-label="No">No</button>
+      </div>
     </div>
-    <div id="second-screen" style="display: none;">
-        <h1>Yay best decision ever!</h1>
-        <img src="https://media.giphy.com/media/3o7aD2sa4z6g1G5y6I/giphy.gif" alt="Happy GIF">
+
+    <div id="celebrate" class="celebrate hidden" role="dialog" aria-hidden="true">
+      <div class="celebrate-card">
+        <div class="hearts" aria-hidden="true"></div>
+        <h2>Yay — best decision ever!</h2>
+        <p class="big">I love you 💖</p>
+        <button id="restart" class="btn">Back</button>
+      </div>
     </div>
-    <script src="js/main.js"></script>
+  </main>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
